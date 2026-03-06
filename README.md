@@ -27,21 +27,26 @@ Flipkart/
 │   ├── main/
 │   │   ├── java/
 │   │   │   ├── base/
-│   │   │   │   └── BaseClass.java          # Base class with driver setup
+│   │   │   │   └── BaseClass.java             # Base class with WebDriver setup
 │   │   │   ├── config/
-│   │   │   │   └── ConfigReader.java       # Configuration properties reader
+│   │   │   │   └── ConfigReader.java          # Configuration properties reader
 │   │   │   └── pages/
-│   │   │       └── HomePage.java           # Page Object for Home Page
+│   │   │       ├── HomePage.java              # Page Object for Home Page
+│   │   │       ├── LoginPage.java             # Page Object for Login Page
+│   │   │       ├── ProductPage.java           # Page Object for Product Page
+│   │   │       └── CheckoutPage.java          # Page Object for Checkout Page
 │   │   └── resources/
-│   │       └── config.properties           # Configuration file
+│   │       └── config.properties              # Configuration file
 │   └── test/
 │       └── java/
 │           └── tests/
-│               ├── Hometest.java           # Test cases for home page
-│               └── LoginTest.java          # Test cases for login
-├── pom.xml                                  # Maven configuration
-├── testng.xml                               # TestNG suite configuration
-└── README.md                                # This file
+│               ├── Hometest.java              # Test cases for home page
+│               ├── LoginTest.java             # Test cases for login functionality
+│               └── ProductTest.java           # Test cases for product & checkout
+├── target/                                    # Build output directory
+├── pom.xml                                    # Maven configuration & dependencies
+├── testng.xml                                 # TestNG suite configuration
+└── README.md                                  # This file
 ```
 
 ## Prerequisites
@@ -78,10 +83,12 @@ headless=false                          # Run in headless mode (true/false)
 base.url=https://www.flipkart.com      # Target URL
 username=your_email@gmail.com           # Flipkart account email
 password=your_password                  # Flipkart account password
+phone.number=9782017696                 # Mobile number for login
 implicit.wait=10                        # Implicit wait in seconds
 explicit.wait=15                        # Explicit wait in seconds
-page.load.timeout=30                    # Page load timeout
+page.load.timeout=30                    # Page load timeout in seconds
 screenshot.path=./screenshots/          # Screenshot storage path
+report.path=./reports/ExtentReport.html # Test report path
 ```
 
 ## Running Tests
@@ -141,6 +148,115 @@ mvn clean test -q
 ### ConfigReader.java
 - Reads configuration from properties file
 - Provides centralized access to all config parameters
+- Methods: `getBrowser()`, `getBaseUrl()`, `getPhoneNumber()`, `getExplicitWait()`, etc.
+
+### Page Objects
+- **HomePage.java** - Home page locators and methods (closeLoginPopup, searchProduct, verifyLogo)
+- **LoginPage.java** - Login page locators and methods (clickLoginButton, enterPhoneNumber, clickRequestOtp)
+- **ProductPage.java** - Product page locators and methods (selectProduct, addToCart, buyNow)
+- **CheckoutPage.java** - Checkout page locators and methods (placeOrder, continueShop)
+
+## Usage Example
+
+```java
+@Test
+public void testLogin() {
+    HomePage homePage = new HomePage(driver);
+    LoginPage loginPage = new LoginPage(driver);
+    
+    // Navigate to home
+    driver.get(ConfigReader.getBaseUrl());
+    
+    // Close popup if exists
+    homePage.closeLoginPopup();
+    
+    // Click login button
+    loginPage.clickLoginButton();
+    
+    // Enter phone number from config
+    loginPage.enterPhoneNumber(ConfigReader.getPhoneNumber());
+    
+    // Request OTP
+    loginPage.clickRequestOtp();
+}
+```
+
+## Dependencies
+
+The project includes the following Maven dependencies:
+
+```xml
+<!-- Selenium WebDriver -->
+<dependency>
+    <groupId>org.seleniumhq.selenium</groupId>
+    <artifactId>selenium-java</artifactId>
+    <version>4.18.1</version>
+</dependency>
+
+<!-- TestNG Framework -->
+<dependency>
+    <groupId>org.testng</groupId>
+    <artifactId>testng</artifactId>
+    <version>7.9.0</version>
+</dependency>
+
+<!-- WebDriver Manager -->
+<dependency>
+    <groupId>io.github.bonigarcia</groupId>
+    <artifactId>webdrivermanager</artifactId>
+    <version>5.7.0</version>
+</dependency>
+
+<!-- Commons IO -->
+<dependency>
+    <groupId>commons-io</groupId>
+    <artifactId>commons-io</artifactId>
+    <version>2.15.1</version>
+</dependency>
+```
+
+## Troubleshooting
+
+### 1. WebDriver Not Found
+```bash
+mvn clean install -U  # Update snapshots
+```
+
+### 2. Password/Credentials Issues
+- Update `config.properties` with valid credentials
+- Ensure special characters are properly escaped
+
+### 3. Element Not Found
+- Check XPath locators in Page Object files
+- Verify element is visible before interaction
+- Increase wait times in config.properties
+
+## Recent Updates (v1.0)
+
+✅ Fixed all compilation errors
+✅ Integrated phone number configuration
+✅ Updated LoginTest to use ConfigReader.getPhoneNumber()
+✅ Created ProductTest and ProductPage classes
+✅ Implemented CheckoutPage Page Object
+✅ Enhanced error handling in page objects
+
+## Contributing
+
+1. Create a new branch: `git checkout -b feature/your-feature`
+2. Commit changes: `git commit -m "Add new feature"`
+3. Push to remote: `git push origin feature/your-feature`
+4. Create a Pull Request
+
+## Contact
+
+For issues or questions, please create an issue on the GitHub repository.
+
+---
+
+**Last Updated:** March 6, 2026  
+**Maintainer:** [Your Name]  
+**License:** MIT
+
 - Handles IOException with proper error messaging
 
 ### HomePage.java
