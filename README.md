@@ -101,22 +101,48 @@ mvn clean test -q
 
 ## Test Cases
 
-### 1. verifyTitle()
-- **Description:** Verifies that the page title contains "Flipkart"
-- **Expected:** Page loads with correct title
+**Total: 21 Test Cases** ✅
 
-### 2. verifySearch()
-- **Description:** Tests product search functionality
-- **Steps:** Enter "iPhone" in search box and submit
-- **Expected:** Search results page loads successfully
+### Hometest.java (4 Test Cases)
 
-### 3. verifyLogo()
-- **Description:** Verifies Flipkart logo visibility and URL
-- **Expected:** Logo visible and current URL contains "flipkart"
+1. **verifyTitle()**
+   - Verifies that the page title contains "Flipkart"
+   - Expected: Page loads with correct title
 
-### 4. verifyLoginButton()
-- **Description:** Tests login button visibility on home page
-- **Expected:** Login button is clickable and visible
+2. **verifySearch()**
+   - Tests product search functionality (searches for "iPhone")
+   - Expected: Search results page loads successfully
+
+3. **verifyLogo()**
+   - Verifies Flipkart logo visibility and URL
+   - Expected: Logo visible and current URL contains "flipkart"
+
+4. **verifyLoginButton()**
+   - Tests login button visibility on home page
+   - Expected: Login button is clickable and visible
+
+### LoginTest.java (7 Test Cases)
+
+1. **testLoginButtonVisibility()** - Verify login button is accessible
+2. **testLoginModalAppears()** - Verify login modal opens on button click
+3. **testEnterPhoneAndRequestOtp()** - Enter phone number and request OTP
+4. **testLoginWithPhoneNumber()** - Parameterized test with multiple phone numbers
+5. **testLoginFlowSteps()** - Test complete login flow steps
+6. **testPhoneNumberValidation()** - Validate phone number input
+7. **testOtpInput()** - Test OTP input functionality
+
+### ProductTest.java (10 Test Cases)
+
+1. **testSearchProduct()** - Search for a product
+2. **testSelectFirstProduct()** - Select first product from search results
+3. **testAddToCart()** - Add product to cart
+4. **testBuyNow()** - Buy product immediately
+5. **testProductDetails()** - Verify product details
+6. **testCheckoutFlow()** - Complete checkout process
+7. **testPlaceOrder()** - Place order successfully
+8. **testPaymentFlow()** - Test payment processing
+9. **testOrderConfirmation()** - Verify order confirmation
+10. **testContinueShopping()** - Continue shopping after purchase
 
 ## Key Classes
 
