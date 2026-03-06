@@ -176,20 +176,6 @@ mvn clean test -q
 - **Explicit Wait:** Applied to specific elements with expected conditions
 - **Page Load Timeout:** Maximum time for page to load
 
-## Troubleshooting
-
-### Issue: Driver Not Found
-**Solution:** WebDriver Manager will automatically download the appropriate driver. Ensure internet connection is available.
-
-### Issue: Element Not Found
-**Solution:** Check if XPath locators are still valid. Flipkart website structure may change. Update locators in `HomePage.java`.
-
-### Issue: Element Click Intercepted
-**Solution:** The framework includes JavaScript click fallback. Wait time is automatically added before clicking search button.
-
-### Issue: Headless Mode Issues
-**Solution:** Disable headless mode in config.properties and run tests with GUI.
-
 ## Advanced Usage
 
 ### Custom Test Execution Order
