@@ -62,7 +62,7 @@ jobs:
       with:
         name: TestNG Results
         path: 'target/surefire-reports/testng-results.xml'
-        reporter: 'java-testng'
+        reporter: 'testng'
         fail-on-error: false
 
     - name: Upload Screenshots (if any)

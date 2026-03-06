@@ -30,11 +30,16 @@ public class BaseClass {
             case "chrome":
                 ChromeOptions options = new ChromeOptions();
                 if (ConfigReader.isHeadless()) {
-                    options.addArguments("--headless");
+                    options.addArguments("--headless=new");
+                    options.addArguments("--no-sandbox");
+                    options.addArguments("--disable-dev-shm-usage");
+                    options.addArguments("--window-size=1920,1080");
+                } else {
+                    options.addArguments("--start-maximized");
                 }
-                options.addArguments("--start-maximized");
                 options.addArguments("--disable-notifications");
                 options.addArguments("--disable-popup-blocking");
+                options.addArguments("--disable-blink-features=AutomationControlled");
                 driver = new ChromeDriver(options);
                 break;
             case "firefox":

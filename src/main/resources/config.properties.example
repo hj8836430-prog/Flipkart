@@ -1,5 +1,5 @@
 browser=chrome
-headless=false
+headless=true
 base.url=https://www.flipkart.com
 username=your_email@gmail.com
 password=your_password
