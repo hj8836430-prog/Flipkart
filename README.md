@@ -73,24 +73,6 @@ Maven will automatically download all dependencies from `pom.xml`:
 mvn clean install
 ```
 
-### 3. Configure Settings
-
-Edit `src/main/resources/config.properties`:
-
-```properties
-browser=chrome                          # Browser choice: chrome, firefox, edge
-headless=false                          # Run in headless mode (true/false)
-base.url=https://www.flipkart.com      # Target URL
-username=your_email@gmail.com           # Flipkart account email
-password=your_password                  # Flipkart account password
-phone.number=9782017696                 # Mobile number for login
-implicit.wait=10                        # Implicit wait in seconds
-explicit.wait=15                        # Explicit wait in seconds
-page.load.timeout=30                    # Page load timeout in seconds
-screenshot.path=./screenshots/          # Screenshot storage path
-report.path=./reports/ExtentReport.html # Test report path
-```
-
 ## Running Tests
 
 ### Run All Tests
@@ -214,22 +196,6 @@ The project includes the following Maven dependencies:
     <version>2.15.1</version>
 </dependency>
 ```
-
-## Troubleshooting
-
-### 1. WebDriver Not Found
-```bash
-mvn clean install -U  # Update snapshots
-```
-
-### 2. Password/Credentials Issues
-- Update `config.properties` with valid credentials
-- Ensure special characters are properly escaped
-
-### 3. Element Not Found
-- Check XPath locators in Page Object files
-- Verify element is visible before interaction
-- Increase wait times in config.properties
 
 ## Recent Updates (v1.0)
 
