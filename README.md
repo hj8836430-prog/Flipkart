@@ -197,30 +197,9 @@ The project includes the following Maven dependencies:
 </dependency>
 ```
 
-## Recent Updates (v1.0)
-
-✅ Fixed all compilation errors
-✅ Integrated phone number configuration
-✅ Updated LoginTest to use ConfigReader.getPhoneNumber()
-✅ Created ProductTest and ProductPage classes
-✅ Implemented CheckoutPage Page Object
-✅ Enhanced error handling in page objects
-
-## Contributing
-
-1. Create a new branch: `git checkout -b feature/your-feature`
-2. Commit changes: `git commit -m "Add new feature"`
-3. Push to remote: `git push origin feature/your-feature`
-4. Create a Pull Request
-
-## Contact
-
-For issues or questions, please create an issue on the GitHub repository.
-
 ---
 
 **Last Updated:** March 6, 2026  
-**Maintainer:** [Your Name]  
 **License:** MIT
 
 - Handles IOException with proper error messaging
