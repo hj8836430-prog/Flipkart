@@ -1,8 +1,8 @@
 package base;
 
-import java.time.Duration;
 import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -10,8 +10,8 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
@@ -19,7 +19,7 @@ import config.ConfigReader;
 
 public class BaseClass {
 
-    // ✅ ye line exactly aisi honi chahiye
+    // ye line exactly aisi honi chahiye
     protected static WebDriver driver;
 
     @BeforeClass
@@ -53,7 +53,7 @@ public class BaseClass {
             .pageLoadTimeout(Duration.ofSeconds(ConfigReader.getPageLoadTimeout()));
         driver.manage().window().maximize();
         driver.get(ConfigReader.getBaseUrl());
-        System.out.println("✅ Browser open hua: " + ConfigReader.getBaseUrl());
+        System.out.println("Browser open hua: " + ConfigReader.getBaseUrl());
     }
 
     public String takeScreenshot(String testName) {
@@ -65,7 +65,7 @@ public class BaseClass {
         try {
             FileUtils.copyFile(source, new File(path));
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Screenshot error: " + e.getMessage());
         }
         return path;
     }
@@ -82,7 +82,7 @@ public class BaseClass {
     public void tearDown() {
         if (driver != null) {
             driver.quit();
-            System.out.println("✅ Browser band ho gaya");
+            System.out.println("Browser band ho gaya");
         }
     }
 }

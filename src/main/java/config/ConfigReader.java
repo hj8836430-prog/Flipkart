@@ -11,14 +11,12 @@ public class ConfigReader {
         "src/main/resources/config.properties";
 
     static {
-        try {
-            FileInputStream fis = new FileInputStream(CONFIG_PATH);
+        try (FileInputStream fis = new FileInputStream(CONFIG_PATH)) {
             properties = new Properties();
             properties.load(fis);
-            fis.close();
         } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException("❌ config.properties nahi mili!");
+            System.err.println("config.properties nahi mili: " + e.getMessage());
+            throw new RuntimeException("config.properties nahi mili!", e);
         }
     }
 
