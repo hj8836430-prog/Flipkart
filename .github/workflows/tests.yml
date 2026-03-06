@@ -1,0 +1,65 @@
+name: Flipkart Automation Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        java-version: ['11']
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up JDK
+      uses: actions/setup-java@v3
+      with:
+        java-version: ${{ matrix.java-version }}
+        distribution: 'temurin'
+        cache: maven
+
+    - name: Build with Maven
+      run: mvn clean install
+
+    - name: Run Tests
+      run: mvn clean test
+
+    - name: Generate Test Reports
+      if: always()
+      run: |
+        echo "Test Execution Completed"
+        if [ -d "target/surefire-reports" ]; then
+          ls -la target/surefire-reports/ || echo "No reports found"
+        fi
+
+    - name: Upload Test Results
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-results
+        path: target/surefire-reports/
+        retention-days: 30
+
+    - name: Publish Test Report
+      if: always()
+      uses: dorny/test-reporter@v1
+      with:
+        name: TestNG Results
+        path: 'target/surefire-reports/testng-results.xml'
+        reporter: 'java-testng'
+        fail-on-error: false
+
+    - name: Upload Screenshots (if any)
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: screenshots
+        path: screenshots/
+        if-no-files-found: ignore
+        retention-days: 7
