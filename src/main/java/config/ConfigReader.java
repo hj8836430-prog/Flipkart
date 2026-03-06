@@ -12,8 +12,8 @@ public class ConfigReader {
 
     static {
         try (FileInputStream fis = new FileInputStream(CONFIG_PATH)) {
-            properties = new Properties();
-            properties.load(fis);
+            ConfigReader.properties = new Properties();
+            ConfigReader.properties.load(fis);
         } catch (IOException e) {
             System.err.println("config.properties nahi mili: " + e.getMessage());
             throw new RuntimeException("config.properties nahi mili!", e);
@@ -58,7 +58,11 @@ public class ConfigReader {
     public static boolean isHeadless() {
         return Boolean.parseBoolean(
             properties.getProperty("headless", "false"));
-    } 
+    }
+
+    public static String getPhoneNumber() {
+        return properties.getProperty("phone.number", "9782017696");
+    }
     
     
     

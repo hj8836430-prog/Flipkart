@@ -9,4 +9,16 @@
         </classes>
     </test>
 
+    <test name="Login Tests">
+        <classes>
+            <class name="tests.LoginTest"/>
+        </classes>
+    </test>
+
+    <test name="Product Tests">
+        <classes>
+            <class name="tests.ProductTest"/>
+        </classes>
+    </test>
+
 </suite>
