@@ -29,6 +29,9 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y chromium-browser
 
+    - name: Create config.properties from example
+      run: cp src/main/resources/config.properties.example src/main/resources/config.properties
+
     - name: Build with Maven
       run: mvn clean install -DskipTests
 
